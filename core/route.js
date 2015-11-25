@@ -9,10 +9,12 @@ exports.setup = function(app) {
 	var postingan = require('../routes/post_data');
 	var komentar = require('../routes/post_komentar');
 	var like = require('../routes/post_like');
+	var image_upload = require('../routes/upload_foto');
 //	var uploadfoto = require('../routes/post_upload_image');
 
 //	app.use('/api', testing);
 	app.use('/api/post/', postingan);
+	app.use('/api/post/', image_upload);
 	app.use('/api/komentar/', komentar);
 	app.use('/api/like/', like);
 	app.use('/api/user/', user);

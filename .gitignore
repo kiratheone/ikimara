@@ -32,3 +32,6 @@ node_modules
 
 #eclipse seting
 .settings
+
+#folder uploads
+uploads

@@ -10,14 +10,30 @@ router.get('/id/:id', function(req, res) {
 	}, function(err, val) {
 		var msg = err;
 		if (val.length <= 0) {
-			msg = "user ditemukan";
+			msg = "user tidak ditemukan";
 		}
 		helperview.showjsontoview(res, msg, val);
 	});
 
 });
 
-router.post('/add', function(req, res) {
+router.post('/login', function(req, res) {
+	var jsonData = JSON.parse(req.body.jsondata);
+	var user_crud = crud(req.mysql, 'ikimara_user');
+	user_crud.load({
+		username : jsonData.username,
+		pasword : jsonData.pasword,
+	}, function(err, val) {
+		var msg = err;
+		if (val.length <= 0) {
+			msg = "Username atau Password salah";
+		}
+		helperview.showjsontoview(res, msg, val);
+	});
+
+});
+
+router.post('/register', function(req, res) {
 	var jsonData = JSON.parse(req.body.jsondata);
 	var user_crud = crud(req.mysql, 'ikimara_user');
 	user_crud.create(jsonData, function(err, val) {

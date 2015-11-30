@@ -40,6 +40,20 @@ router.get('/show/:title', function(req, res) {
 
 });
 
+router.post('/show/more', function(req, res) {
+	
+	var opt = {
+			custom : "AND waktu > " + req.body.waktu
+		};
+	var user_crud = crud(req.mysql, 'ikimara_view_post');
+	user_crud.load({}, function(err, val) {
+		helperview.showjsontoview(res, err, val);
+	}, opt);
+
+	// res.type('txt').send(req.params.title);
+
+});
+
 router.post('/add', function(req, res) {
 	var jsonData = JSON.parse(req.body.jsondata);
 	var user_crud = crud(req.mysql, 'ikimara_post');

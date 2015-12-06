@@ -40,11 +40,24 @@ router.get('/show/:title', function(req, res) {
 
 });
 
-router.post('/show/more', function(req, res) {
-	
-	var opt = {
-			custom : "AND waktu > " + req.body.waktu
+router.post('/show/:act', function(req, res) {
+
+	var opt;
+
+	if (req.params.act === 'update') {
+		opt = {
+			custom : "AND waktu > " + req.body.waktu+" LIMIT 10"
 		};
+	} else if (req.params.act === 'less') {
+		opt = {
+			custom : "AND waktu < " + req.body.waktu
+		};
+	} else {
+		var msg = "parameter ngawur";
+		helperview.showjsontoview(res, msg, '');
+		return;
+	}
+
 	var user_crud = crud(req.mysql, 'ikimara_view_post');
 	user_crud.load({}, function(err, val) {
 		helperview.showjsontoview(res, err, val);

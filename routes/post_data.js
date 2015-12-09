@@ -67,14 +67,14 @@ router.post('/show/:act', function(req, res) {
 
 });
 
-router.post('/add', function(req, res) {
-	var jsonData = JSON.parse(req.body.jsondata);
-	var user_crud = crud(req.mysql, 'ikimara_post');
-	user_crud.create(jsonData, function(err, val) {
-		helperview.showjsontoview(res, err, val);
-	});
-
-});
+//router.post('/add', function(req, res) {
+//	var jsonData = JSON.parse(req.body.jsondata);
+//	var user_crud = crud(req.mysql, 'ikimara_post');
+//	user_crud.create(jsonData, function(err, val) {
+//		helperview.showjsontoview(res, err, val);
+//	});
+//
+//});
 
 router.post('/delete', function(req, res) {
 	var jsonData = JSON.stringify(req.body.jsondata);

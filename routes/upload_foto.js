@@ -27,18 +27,29 @@ router.get('/image/test', function(req, res) {
 
 });
 
-router.post('/image/upload', upload.single('image'), function(req, res) {
-	console.log(req.body);
+router.post('/add', upload.single('image'), function(req, res) {
+	console.log("sebelum -->>" + req.body.jsondata);
+	console.log(decodeURIComponent("sesudah -->>" + req.body.jsondata));
 	console.log("-----------------");
 	console.log(req.file);
+
+	var jsonData = JSON.parse(decodeURIComponent(req.body.jsondata));
+	jsonData.gambar = req.file.filename;
+	console.log(jsonData);
 	var user_crud = crud(req.mysql, 'ikimara_post');
-	user_crud.update({
-		id_post : req.body.id_post
-	}, {
-		gambar : req.file.filename
-	}, function(err, val) {
+	user_crud.create(jsonData, function(err, val) {
 		helperview.showjsontoview(res, err, val);
 	});
+
+	// res.type('txt').send("test");
+	// var user_crud = crud(req.mysql, 'ikimara_post');
+	// user_crud.update({
+	// id_post : req.body.id_post
+	// }, {
+	// gambar : req.file.filename
+	// }, function(err, val) {
+	// helperview.showjsontoview(res, err, val);
+	// });
 });
 
 module.exports = router;

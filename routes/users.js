@@ -18,11 +18,11 @@ router.get('/id/:id', function(req, res) {
 });
 
 router.post('/login', function(req, res) {
-	var jsonData = JSON.parse(req.body.jsondata);
+	var jsonData = req.body;
 	var user_crud = crud(req.mysql, 'ikimara_user');
 	user_crud.load({
 		username : jsonData.username,
-		pasword : jsonData.pasword,
+		pasword : jsonData.password,
 	}, function(err, val) {
 		var msg = err;
 		if (val.length <= 0) {

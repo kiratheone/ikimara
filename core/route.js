@@ -19,7 +19,7 @@ exports.setup = function(app) {
 	app.use('/api/like/', like);
 	app.use('/api/user/', user);
 	
-//	app.use(function(req, res, next) {
-//		res.type('txt').status(404).send('Tidak dapat mengakses halaman ini');
-//	});
+	app.use(function(req, res, next) {
+		res.type('txt').status(404).send('Tidak dapat mengakses halaman ini');
+	});
 };

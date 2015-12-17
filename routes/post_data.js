@@ -3,6 +3,9 @@ var router = express();
 var crud = require('mysql-crud');
 var helperview = require('../core/helperShowJson');
 
+
+//web APi
+
 router.get('/show/:title', function(req, res) {
 
 	var opt;

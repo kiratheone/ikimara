@@ -1,8 +1,32 @@
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
-a {
-  color: #00B7FF;
+#header {
+	width: 100%;
+	height: 40px;
+	background: #119E5A;
+	text-align: start;
+	display: flex;
+	align-items: center;
+	color: #FFFFFF;
+}
+
+#map {
+	position: absolute;
+	top: 41px;
+	bottom: 0;
+	width: 65%;
+}
+
+#side-div {
+	background: #FFFFFF;
+	position: relative;
+	padding-right: 1em;
+	bottom: 0;
+	width: 32%;
+	margin: 2em 67%;
+	overflow-y: hidden;
 }

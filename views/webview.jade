@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    meta(charset='utf-8')
+    title Ikimara
+    meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
+    link(href='http://fonts.googleapis.com/css?family=Roboto', rel='stylesheet', type='text/css')
+    script(src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js')
+    script(src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js')
+    link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css', rel='stylesheet')
+    link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css', rel='stylesheet')
+    link(href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css', rel='stylesheet')
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    #header 		Keindahan Alam Indonesia
+    #map
+    #side-div
+      h2 Title
+      p
+        i Time
+      p Diskripsi
+      img(src='http://www.tanyoe.com/wp-content/uploads/2015/04/Keindahan-alam-indonesia-raja-ampat-640x449.jpg', alt='Mountain View', style='width:420px;')
+    script.
+      L.mapbox.accessToken = 'pk.eyJ1Ijoia2lyYXRoZW9uZSIsImEiOiJjaWh5cW14aGUwNDAzdHNraDQ0YTM1NHJ2In0.dihVAwaZJ5y9uWYqMwq97w';
+      var map = L.mapbox.map('map', 'mapbox.dc-markers');
+      map.setView([-1.773516, 120.207642], 5);
+      var featureLayer = L.mapbox.featureLayer()
+      .loadURL('http://localhost:3000/geojson');
+      
+      featureLayer.on('click', function(e) {
+      console.log( e.layer.feature.properties.title );
+      map.panTo(e.layer.getLatLng());
+      });
+      
+      featureLayer.on('ready', function(e) {
+      console.log( "ready" );
+      var clusterGroup = new L.MarkerClusterGroup();
+      e.target.eachLayer(function(layer) {
+      clusterGroup.addLayer(layer);
+      });
+      map.addLayer(clusterGroup);
+      });
+      
+      
+      
+      
+      
+      
+      
+	  
+	  

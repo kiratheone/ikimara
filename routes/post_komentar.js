@@ -4,15 +4,12 @@ var crud = require('mysql-crud');
 var helperview = require('../core/helperShowJson');
 
 router.get('/idpost/:id', function(req, res) {
-	var user_crud = crud(req.mysql, 'ikimara_komentar');
+	var user_crud = crud(req.mysql, 'ikimara_view_komentar');
 	user_crud.load({
 		id_post : req.params.id
 	}, function(err, val) {
 		var msg = err;
-		if (val.length <= 0) {
-			msg = "postingan tidak ditemukan";
-		}
-		helperview.showjsontoview(res, msg, val);
+		helperview.showjsontoview(res, '', val);
 	});
 
 });

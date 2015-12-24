@@ -27,6 +27,7 @@ body {
 	padding-right: 1em;
 	bottom: 0;
 	width: 32%;
+	height: 500px;
 	margin: 2em 67%;
-	overflow-y: hidden;
+	overflow-y: auto;
 }

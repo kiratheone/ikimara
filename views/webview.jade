@@ -6,20 +6,18 @@ html
     meta(name='viewport', content='initial-scale=1,maximum-scale=1,user-scalable=no')
     link(href='http://fonts.googleapis.com/css?family=Roboto', rel='stylesheet', type='text/css')
     script(src='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js')
     script(src='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js')
     link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css', rel='stylesheet')
     link(href='https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css', rel='stylesheet')
     link(href='https://api.mapbox.com/mapbox.js/v2.2.3/mapbox.css', rel='stylesheet')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    #header 		Keindahan Alam Indonesia
+    #header &nbsp;&nbsp;&nbsp;&nbsp;Keindahan Alam Indonesia
     #map
     #side-div
-      h2 Title
-      p
-        i Time
-      p Diskripsi
-      img(src='http://www.tanyoe.com/wp-content/uploads/2015/04/Keindahan-alam-indonesia-raja-ampat-640x449.jpg', alt='Mountain View', style='width:420px;')
+      h2 Klik markernya untuk detail
+      
     script.
       L.mapbox.accessToken = 'pk.eyJ1Ijoia2lyYXRoZW9uZSIsImEiOiJjaWh5cW14aGUwNDAzdHNraDQ0YTM1NHJ2In0.dihVAwaZJ5y9uWYqMwq97w';
       var map = L.mapbox.map('map', 'mapbox.dc-markers');
@@ -30,6 +28,18 @@ html
       featureLayer.on('click', function(e) {
       console.log( e.layer.feature.properties.title );
       map.panTo(e.layer.getLatLng());
+      
+      var title = '<h2>'+e.layer.feature.properties.title+'</h2>';
+      var time = '<p><i>'+e.layer.feature.properties.waktu+'</i></p>';
+      var disc = '<p>'+e.layer.feature.properties.diskripsi+'</p>';
+      var image = e.layer.feature.properties.gambar;
+      var gambar = '<img src=/api/uploads/images/'+image+' alt="Mountain View" style="width:410px;">';
+      
+      $('#side-div').empty();
+      $("#side-div").append(title);
+      $("#side-div").append(time);
+      $("#side-div").append(disc);
+      $("#side-div").append(gambar);
       });
       
       featureLayer.on('ready', function(e) {
@@ -40,7 +50,6 @@ html
       });
       map.addLayer(clusterGroup);
       });
-      
       
       
       

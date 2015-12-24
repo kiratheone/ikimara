@@ -6,14 +6,18 @@ var helperview = require('../core/helperShowJson');
 
 //web APi
 
-router.get('/show/:title', function(req, res) {
+router.get('/show/:title/:id_user', function(req, res) {
 
 	var opt;
 
+	var customQuery = "SELECT ikimara_view_post.id_post, id_user, gambar, waktu, diskripsi, latitude, longitude, nama_lokasi, suka, nama, komentar, ikimara_like.id_like FROM `ikimara_view_post` LEFT OUTER JOIN ikimara_like on ikimara_like.id_post = ikimara_view_post.id_post and ikimara_like.id_user_liked = "+req.params.id_user+" GROUP BY ikimara_view_post.id_post";
 	if (req.params.title === 'all') {
-		opt = '';
+		opt = {
+			query : customQuery,
+		};
 	} else if (req.params.title === 'mostliked') {
 		opt = {
+			query : customQuery,	
 			custom : "ORDER BY suka DESC"
 		};
 
@@ -24,7 +28,7 @@ router.get('/show/:title', function(req, res) {
 
 	} else if (req.params.title === 'random') {
 		opt = {
-			custom : "ORDER BY RAND()"
+			custom :  "ORDER BY RAND()"
 		};
 	}
 
